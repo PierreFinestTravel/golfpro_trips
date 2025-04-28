@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Golf Trip Planner for Pros (with Admin)</title>
+  <title>Golf Trip Planner for Pros (Fixed Admin Access)</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <style>
     body {
@@ -28,10 +28,7 @@
     }
     #adminPanel { display: none; }
     @keyframes fadeSlideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
     .message { margin: 1.5rem 0; white-space: pre-wrap; line-height: 1.6; font-size: 1.1rem; }
     .bot { color: #2e8b57; font-weight: 600; }
@@ -94,6 +91,7 @@
 
 <div id="adminLogin">
   <input type="password" id="adminCode" placeholder="Enter Admin Code">
+  <button id="adminUnlock" class="admin-button">Unlock Admin</button>
 </div>
 
 <script>
@@ -104,19 +102,18 @@ const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 const correctCode = 'admin123';
 const adminCodeInput = document.getElementById('adminCode');
+const adminUnlockButton = document.getElementById('adminUnlock');
 const chatbox = document.getElementById('chatbox');
 const adminPanel = document.getElementById('adminPanel');
 
-adminCodeInput.addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    if (adminCodeInput.value === correctCode) {
-      chatbox.style.display = 'none';
-      adminPanel.style.display = 'block';
-      adminCodeInput.style.display = 'none';
-      setupAdminForm();
-    } else {
-      alert('Incorrect code.');
-    }
+adminUnlockButton.addEventListener('click', function() {
+  if (adminCodeInput.value === correctCode) {
+    chatbox.style.display = 'none';
+    adminPanel.style.display = 'block';
+    document.getElementById('adminLogin').style.display = 'none';
+    setupAdminForm();
+  } else {
+    alert('Incorrect code.');
   }
 });
 
