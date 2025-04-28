@@ -4,58 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Golf Trip Planner for Pros (Fixed Admin Access)</title>
+  <title>Golf Trip Planner for Pros (Final Working Version)</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #e0f7f4, #d7f2ec);
-      padding: 2rem;
-      overflow-x: hidden;
-    }
-    #chatbox, #adminPanel {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      max-width: 600px;
-      margin: 2rem auto;
-      position: relative;
-      animation: fadeSlideIn 1s ease forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
+    body { font-family: 'Poppins', sans-serif; background: linear-gradient(to right, #e0f7f4, #d7f2ec); padding: 2rem; overflow-x: hidden; }
+    #chatbox, #adminPanel { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); max-width: 600px; margin: 2rem auto; position: relative; animation: fadeSlideIn 1s ease forwards; opacity: 0; transform: translateY(20px); }
     #adminPanel { display: none; }
-    @keyframes fadeSlideIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeSlideIn { to { opacity: 1; transform: translateY(0); } }
     .message { margin: 1.5rem 0; white-space: pre-wrap; line-height: 1.6; font-size: 1.1rem; }
     .bot { color: #2e8b57; font-weight: 600; }
     .user { text-align: right; color: #555; }
     .button-container, .checkbox-container { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
-    .option-button, .checkbox-button, .admin-button {
-      background: rgba(46, 139, 87, 0.8);
-      border: 1px solid rgba(255,255,255,0.4);
-      color: #fff;
-      padding: 0.85rem 1.5rem;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 1rem;
-      flex-grow: 1;
-      text-align: center;
-      transition: background 0.3s, transform 0.2s;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .option-button:hover, .checkbox-button:hover, .admin-button:hover {
-      background: rgba(39, 174, 96, 0.9);
-      transform: translateY(-2px);
-    }
+    .option-button, .checkbox-button, .admin-button { background: rgba(46, 139, 87, 0.8); border: 1px solid rgba(255,255,255,0.4); color: #fff; padding: 0.85rem 1.5rem; border-radius: 12px; cursor: pointer; font-size: 1rem; flex-grow: 1; text-align: center; transition: background 0.3s, transform 0.2s; backdrop-filter: blur(6px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .option-button:hover, .checkbox-button:hover, .admin-button:hover { background: rgba(39, 174, 96, 0.9); transform: translateY(-2px); }
     #adminLogin { margin-top: 2rem; text-align: center; }
-    input[type="password"], input[type="text"], textarea, select {
-      width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 8px;
-    }
+    input[type="password"], input[type="text"], textarea, select { width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 8px; }
   </style>
 </head>
 <body>
@@ -95,6 +58,7 @@
 </div>
 
 <script>
+window.onload = function() {
 // Supabase connection
 const supabaseUrl = 'https://SUPABASE_URL_HERE';
 const supabaseKey = 'SUPABASE_ANON_KEY_HERE';
@@ -119,19 +83,11 @@ adminUnlockButton.addEventListener('click', function() {
 
 function setupAdminForm() {
   const components = [
-    'Budget under € 1.200',
-    'Budget € 1.200-1.500',
-    'Budget € 1.500-2.000',
-    'Tour quality training facilities',
-    'Halfboard',
-    'All inclusive',
-    'At least 2 courses',
-    'At least 3 courses'
+    'Budget under € 1.200', 'Budget € 1.200-1.500', 'Budget € 1.500-2.000',
+    'Tour quality training facilities', 'Halfboard', 'All inclusive',
+    'At least 2 courses', 'At least 3 courses'
   ];
-  const areas = [
-    'Spain', 'Algarve', 'Canary Island', 'Morocco',
-    'South Africa', 'Mauritius', 'Vietnam', 'Italy'
-  ];
+  const areas = ['Spain', 'Algarve', 'Canary Island', 'Morocco', 'South Africa', 'Mauritius', 'Vietnam', 'Italy'];
 
   const compDiv = document.getElementById('components');
   components.forEach(comp => {
@@ -173,6 +129,7 @@ function setupAdminForm() {
     }
   });
 }
+};
 </script>
 
 </body>
